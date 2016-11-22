@@ -1,0 +1,24 @@
+{
+  "name": "react-mentoring",
+  "version": "1.0.0",
+  "description": "React mentoring course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andrei-Akula/react-mentoring.git"
+  },
+  "keywords": [
+    "React",
+    "babel",
+    "webpack"
+  ],
+  "author": "Andrei Akula",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Andrei-Akula/react-mentoring/issues"
+  },
+  "homepage": "https://github.com/Andrei-Akula/react-mentoring#readme"
+}
