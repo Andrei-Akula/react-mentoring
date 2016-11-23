@@ -4,7 +4,9 @@
   "description": "React mentoring course",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --config webpack.config.js",
+    "build:dev": "webpack --config webpack.config.js --colors -d"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,22 @@
   "bugs": {
     "url": "https://github.com/Andrei-Akula/react-mentoring/issues"
   },
-  "homepage": "https://github.com/Andrei-Akula/react-mentoring#readme"
+  "homepage": "https://github.com/Andrei-Akula/react-mentoring#readme",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "css-loader": "^0.26.0",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "file-loader": "^0.9.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.1.0-beta.27",
+    "webpack-dev-server": "^2.1.0-beta.11"
+  },
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  }
 }
