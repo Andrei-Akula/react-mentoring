@@ -32,7 +32,7 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', '.json', '.jsx'],
-        modules: ['node_modules']
+        modules: [cwd, 'node_modules']
     },
     devtool: 'source-map',
     plugins: [
