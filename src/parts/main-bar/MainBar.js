@@ -6,25 +6,23 @@ import './MainBar.css';
 function MainBar() {
     return (
         <section className="MainBar">
-        <nav className="level">
-          <div className="level-left">
-            <div className="level-item">
-              <h2 className="subtitle is-5">
-                To-Do list
-              </h2>
-            </div>
-          </div>
-          <div className="level-right">
-            <div className="level-item">
-              <FilterActive />
-            </div>
-          </div>
-          <div className="level-right">
-            <div className="level-item">
-              <Search />
-            </div>
-          </div>
-        </nav>
+            <nav className="level">
+                <div className="level-left">
+                    <div className="level-item">
+                        <h2 className="subtitle is-5">
+                            To-Do list
+                        </h2>
+                    </div>
+                </div>
+                <div className="level-right">
+                    <div className="level-item is-inline-block">
+                        <FilterActive />
+                    </div>
+                    <div className="level-item is-inline-block">
+                        <Search />
+                    </div>
+                </div>
+            </nav>
         </section>
     );
 }

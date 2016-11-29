@@ -8,17 +8,20 @@ function Footer() {
           <div className="hero-body">
             <div className="container">
                 <div className="columns">
-                  <div className="column has-text-centered">
+                  <div className="column">
                     <img src={logo} className="App-logo" alt="logo" />
                   </div>
                   <div className="column">
-                    Second column
+                    <p>Second column</p>
+                    <p>Second column</p>
                   </div>
                   <div className="column">
-                    Third column
+                    <p>Third column</p>
+                    <p>Third column</p>
                   </div>
                   <div className="column">
-                    Fourth column
+                    <p>Fourth column</p>
+                    <p>Fourth column</p>
                   </div>
                 </div>
             </div>
