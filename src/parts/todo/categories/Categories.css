@@ -1,0 +1,9 @@
+.category-item.box:not(:last-child) {
+    margin-bottom: 0;
+}
+
+
+.Category > .Categories {
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
