@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config webpack.config.js",
     "dev8": "webpack-dev-server --config webpack.config.js --port 8088",
-    "build:dev": "webpack --config webpack.config.js --colors -d"
+    "build:dev": "webpack --config webpack.build.config.js --colors -d"
   },
   "repository": {
     "type": "git",
