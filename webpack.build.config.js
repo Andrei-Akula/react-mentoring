@@ -5,7 +5,7 @@ var cwd = process.cwd();
 module.exports = {
     entry: "./src/index.js",
     output: {
-        path: path.join(cwd, 'dist/'),
+        path: path.join(cwd, 'assets/'),
         filename: "bundle.js",
         publicPath: "assets/"
     },
