@@ -1,9 +1,22 @@
-import React from 'react'
+import React from 'react';
+import './Tasks.css';
 
 function Task(props) {
     return (
         <li className="Task">
-            <div className="task-item box">{props.task.title}</div>
+            <div className="task-item box level">
+                <div className="level-left">
+                    <label className="checkbox">
+                        <input type="checkbox" />
+                    </label>
+                    <span className="task-title">{props.task.title}</span>
+                </div>
+                <div className="level-right">
+                    <a href="#" className="icon is-small">
+                        <i className="fa fa-pencil-square-o"></i>
+                    </a>
+                </div>
+            </div>
         </li>
     );
 }
