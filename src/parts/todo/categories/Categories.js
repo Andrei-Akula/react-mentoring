@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router';
 import './Categories.css';
 
 function Category(props) {
     return (
         <li className="Category">
-            <div className="category-item box">{props.category.title}</div>
+            <div className="category-item box"><Link to={{ pathname: `/category/${props.category.id}` }}>{props.category.title}</Link></div>
             <Categories categoryList={props.category.subCategories} />
         </li>
     );

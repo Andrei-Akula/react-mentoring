@@ -3,8 +3,23 @@ import MainBar from 'src/parts/main-bar/MainBar';
 import ProgressBar from 'src/parts/progress/ProgressBar';
 import Categories from 'src/parts/todo/categories/Categories';
 import Tasks from 'src/parts/todo/tasks/Tasks';
-import fetchTodos from 'src/parts/data/fetchData';
+import fetchTodos, { fetchTodoCategoryItems } from 'src/parts/data/fetchData';
 import './Todo.css';
+
+function getTasks(catId, categories) {
+    for (let cat of categories) {
+        if (cat.id === catId) {
+            return cat.items;
+        } else {
+            let tasks = getTasks(catId, cat.subCategories);
+            if (tasks.length > 0) {
+                return tasks;
+            }
+        }
+
+    }
+    return [];
+}
 
 class Todo extends Component {
     constructor(props) {
@@ -14,7 +29,7 @@ class Todo extends Component {
     }
 
     render() {
-        const tasks = this.state.data.length > 0 ? this.state.data[0].items : [];
+        const tasks = getTasks(this.props.params.catId, this.state.data);
         return (
           <section className="Todo">
             <MainBar />
