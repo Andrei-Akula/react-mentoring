@@ -1,3 +1,13 @@
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 36px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .MainBar {
     background-color: #fff;
     padding: 20px;
@@ -11,6 +21,9 @@
     margin-bottom: 10px;
     padding-left: 10px;
 }
+.task-item .task-title {
+    margin-left: 10px;
+}
 .Todo {
     min-height: 500px;
 }
@@ -18,16 +31,6 @@
 .todo-layout {
     margin-top: 5px;
 }
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 36px;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 body {
   margin: 0;
   padding: 0;
