@@ -5,9 +5,11 @@ import App from 'src/parts/app/App';
 import Todo from 'src/parts/todo/Todo';
 import './index.css';
 
+const rootPath = '/';
+
 ReactDOM.render((
     <Router history={browserHistory}>
-        <Route path="/" component={App} >
+        <Route path={rootPath} component={App} >
             <IndexRoute component={Todo}/>
             <Route path="/category/:catId" component={Todo} />
         </Route>
