@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import './Tasks.css';
 
 function Task(props) {
@@ -7,14 +8,14 @@ function Task(props) {
             <div className="task-item box level">
                 <div className="level-left">
                     <label className="checkbox">
-                        <input type="checkbox" />
+                        <input type="checkbox" checked={props.task.isDone} />
                     </label>
                     <span className="task-title">{props.task.title}</span>
                 </div>
                 <div className="level-right">
-                    <a href="#" className="icon is-small">
+                    <Link to={{ pathname: `/task/${props.task.id}/edit` }}  className="icon is-small">
                         <i className="fa fa-pencil-square-o"></i>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </li>
