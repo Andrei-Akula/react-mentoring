@@ -11,7 +11,7 @@ ReactDOM.render((
     <Router history={browserHistory}>
         <Route path={rootPath} component={App} >
             <IndexRoute component={Todo}/>
-            <Route path="/category/:catId" component={Todo} />
+            <Route path="{rootPath}/category/:catId" component={Todo} />
         </Route>
     </Router>
 ), document.getElementById('root'));
