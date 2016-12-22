@@ -5,7 +5,7 @@ import App from 'src/parts/app/App';
 import Todo from 'src/parts/todo/Todo';
 import './index.css';
 
-const rootPath = '/';
+const rootPath = '/react-mentoring';
 
 ReactDOM.render((
     <Router history={browserHistory}>
