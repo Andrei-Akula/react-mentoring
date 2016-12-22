@@ -31,13 +31,14 @@ function getTodoTasks(catId, categories) {
 }
 
 function getTodoTask(taskId, categories) {
+    const nothing = { null, null };
     for (let cat of categories) {
-        let task = cat.items.reduce((acc, item) => item.id === taskId ? item : acc, null) || getTodoTask(taskId, cat.subCategories);
+        let { task, catId } = cat.items.reduce((task, item) => item.id === taskId ? { task: item, catId: cat.id } : { task, catId: cat.id }, nothing) || getTodoTask(taskId, cat.subCategories);
         if (task !== null) {
-            return task;
+            return { task, catId };
         }
     }
-    return null;
+    return nothing;
 }
 
 export default fetchTodos;

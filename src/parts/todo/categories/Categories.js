@@ -5,7 +5,7 @@ import './Categories.css';
 function Category(props) {
     return (
         <li className="Category">
-            <div className="category-item box"><Link to={{ pathname: `/category/${props.category.id}` }}>{props.category.title}</Link></div>
+            <div className="category-item box"><Link to={`/category/${props.category.id}`}>{props.category.title}</Link></div>
             <Categories categoryList={props.category.subCategories} />
         </li>
     );

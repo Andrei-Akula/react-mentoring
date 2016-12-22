@@ -13,7 +13,7 @@ function Task(props) {
                     <span className="task-title">{props.task.title}</span>
                 </div>
                 <div className="level-right">
-                    <Link to={{ pathname: `/task/${props.task.id}/edit` }}  className="icon is-small">
+                    <Link to={`/task/${props.task.id}/edit`}  className="icon is-small">
                         <i className="fa fa-pencil-square-o"></i>
                     </Link>
                 </div>

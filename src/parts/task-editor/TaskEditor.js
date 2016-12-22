@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import fetchTodos, { getTodoTask } from 'src/parts/data/fetchData';
 import Categories from 'src/parts/todo/categories/Categories'
 import TaskEdit from 'src/parts/task-editor/task-edit/TaskEdit'
 import './TaskEditor.css';
 
 
-class TaskEditor extends Component {
+class TaskEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = { data: fetchTodos() };
@@ -13,8 +13,8 @@ class TaskEditor extends Component {
     }
 
     render () {
-        const task = getTodoTask(this.props.params.taskId, this.state.data);
-        console.log('TaskEditor task', task, this.props.params.taskId);
+        const { task, catId } = getTodoTask(this.props.params.taskId, this.state.data);
+        console.log('TaskEditor task', task, catId, this.props.params.taskId);
         return (
             <section className="TaskEditor">
                 <div className="container is-fluid">
@@ -23,7 +23,7 @@ class TaskEditor extends Component {
                         <Categories categoryList={this.state.data} />
                       </div>
                       <div className="column">
-                        <TaskEdit task={task} />
+                        <TaskEdit task={task} catId={catId} />
                       </div>
                     </div>
                 </div>

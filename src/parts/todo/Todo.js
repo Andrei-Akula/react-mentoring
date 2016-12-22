@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MainBar from 'src/parts/main-bar/MainBar';
 import ProgressBar from 'src/parts/progress/ProgressBar';
 import Categories from 'src/parts/todo/categories/Categories';
@@ -7,7 +7,7 @@ import fetchTodos, { getTodoTasks } from 'src/parts/data/fetchData';
 import './Todo.css';
 
 
-class Todo extends Component {
+class Todo extends React.Component {
     constructor(props) {
         super(props);
         this.state = { data: fetchTodos() };
