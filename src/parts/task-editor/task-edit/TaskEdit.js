@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import './TaskEdit.css';
 
-function TaskEdit({task, catId}) {
+function TaskEdit({task}) {
     return (
         <div className="TaskEdit">
             <div className="task-item box level">
@@ -13,7 +13,7 @@ function TaskEdit({task, catId}) {
                         <button className="button is-success">Save changes</button>
                     </div>
                     <div className="level-item is-inline-block">
-                        <Link className="button is-warning" to={`/category/${catId}`}>Cancel</Link>
+                        <Link className="button is-warning" to={`/category/${task.categoryId}`}>Cancel</Link>
                     </div>
                 </div>
             </div>

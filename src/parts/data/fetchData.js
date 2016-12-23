@@ -1,45 +1,87 @@
 import { createItem, createCategory  } from './factory';
 
-var data = [
-    createCategory('Category #1', [createItem('Item 1 1', '', true), createItem('Item 1 2', ''), createItem('Item 1 2', '')],
-        createCategory('Category #1.2', [createItem('Item 1.2 1', ''), createItem('Item 1.2 2', ''), createItem('Item 1.2 3', '')]),
-        createCategory('Category #1.3', [createItem('Item 1.3 1', ''), createItem('Item 1.3 2', ''), createItem('Item 1.3 3', '')])
-    ),
-    createCategory('Category #2', [createItem('Item 2 1', ''), createItem('Item 2 2', ''), createItem('Item 2 2', '')],
-        createCategory('Category #2.2', [createItem('Item 2.2 1', ''), createItem('Item 2.2 2', ''), createItem('Item 2.2 3', '')]),
-        createCategory('Category #2.3', [createItem('Item 2.3 1', ''), createItem('Item 2.3 2', ''), createItem('Item 2.3 3', '')])
-    )
-];
+// var data = [
+//     createCategory('Category #1', [createItem('Item 1 1', '', true), createItem('Item 1 2', ''), createItem('Item 1 2', '')],
+//         createCategory('Category #1.2', [createItem('Item 1.2 1', ''), createItem('Item 1.2 2', ''), createItem('Item 1.2 3', '')]),
+//         createCategory('Category #1.3', [createItem('Item 1.3 1', ''), createItem('Item 1.3 2', ''), createItem('Item 1.3 3', '')])
+//     ),
+//     createCategory('Category #2', [createItem('Item 2 1', ''), createItem('Item 2 2', ''), createItem('Item 2 2', '')],
+//         createCategory('Category #2.2', [createItem('Item 2.2 1', ''), createItem('Item 2.2 2', ''), createItem('Item 2.2 3', '')]),
+//         createCategory('Category #2.3', [createItem('Item 2.3 1', ''), createItem('Item 2.3 2', ''), createItem('Item 2.3 3', '')])
+//     )
+// ];
 
-function fetchTodos() {
-    return data;
-}
 
-function getTodoTasks(catId, categories) {
-    for (let cat of categories) {
-        if (cat.id === catId) {
-            return cat.items;
-        } else {
-            let tasks = getTodoTasks(catId, cat.subCategories);
-            if (tasks.length > 0) {
-                return tasks;
+
+class TodosList {
+    constructor() {
+        this.data = {
+            categories: [],
+            tasks: []
+        };
+    }
+
+    fetchTodos() {
+        this.data.categories = [
+            createCategory('Category #1',
+                createCategory('Category #1.2'),
+                createCategory('Category #1.3')
+            ),
+            createCategory('Category #2',
+                createCategory('Category #2.2'),
+                createCategory('Category #2.3')
+            )
+        ];
+
+        var tasks = [];
+        for (let i = 0; i < this.data.categories.length; i++) {
+            tasks = tasks.concat(assignCategoryToTasks(this.data.categories[i],
+                createItem(`Item ${i+1} 1`, ''),
+                createItem(`Item ${i+1} 2`, ''),
+                createItem(`Item ${i+1} 3`, '')
+            ));
+            for (let j = 0; j < this.data.categories[i].subCategories.length; j++) {
+                tasks = tasks.concat(assignCategoryToTasks(this.data.categories[i].subCategories[j],
+                    createItem(`Item ${i+1}.${j+2} 1`, ''),
+                    createItem(`Item ${i+1}.${j+2} 2`, ''),
+                    createItem(`Item ${i+1}.${j+2} 3`, '')
+                ));
             }
         }
-
+        this.data.tasks = tasks;
+        return this;
     }
-    return [];
-}
 
-function getTodoTask(taskId, categories) {
-    const nothing = { null, null };
-    for (let cat of categories) {
-        let { task, catId } = cat.items.reduce((task, item) => item.id === taskId ? { task: item, catId: cat.id } : { task, catId: cat.id }, nothing) || getTodoTask(taskId, cat.subCategories);
-        if (task !== null) {
-            return { task, catId };
+    getCategories() {
+        return this.data.categories;
+    }
+
+    getTodoTasks(catId) {
+        return this.data.tasks.filter(task => task.categoryId === catId);
+    }
+
+    getTodoTask(taskId) {
+        for (let task of this.data.tasks) {
+            if (task.id === taskId) {
+                return task;
+            }
         }
+        return null;
     }
-    return nothing;
 }
 
-export default fetchTodos;
-export { getTodoTasks, getTodoTask };
+
+
+function assignCategoryToTasks(category, ...tasks) {
+    return tasks.map((task) => {
+        task.categoryId = category.id;
+        return task;
+    });
+    return tasks;
+}
+
+const todosList =  new TodosList();
+todosList.fetchTodos();
+
+export default todosList;
+export { assignCategoryToTasks };
