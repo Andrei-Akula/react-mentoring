@@ -1,7 +1,8 @@
 import generate from 'shortid';
 
 // var todoItem = {
-//     id: '1',
+//     id: 'z',
+//     categoryId: 'xyz'
 //     date: date,
 //     isDone: false,
 //     title: 'To-do item #1',
@@ -9,7 +10,7 @@ import generate from 'shortid';
 // };
 //
 // var todoCategory = {
-//     id: '1',
+//     id: 'xyz',
 //     title: 'Category 1',
 //     items: [],
 //     subCategories: []
@@ -30,11 +31,10 @@ function createItem(title, desc, done=false) {
 }
 
 
-function createCategory(title, items, ...subCats) {
+function createCategory(title, ...subCats) {
     var newCat = {
         id: makeId(),
         title: title,
-        items: items,
         subCategories: subCats
     };
 

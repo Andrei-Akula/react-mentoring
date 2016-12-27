@@ -1,24 +1,37 @@
 import React from 'react';
+import { Link } from 'react-router';
 import './Tasks.css';
 
-function Task(props) {
-    return (
-        <li className="Task">
-            <div className="task-item box level">
-                <div className="level-left">
-                    <label className="checkbox">
-                        <input type="checkbox" />
-                    </label>
-                    <span className="task-title">{props.task.title}</span>
+class Task extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { isDone: props.task.isDone };
+        this.task = props.task;
+        this.handleOnChange = this.handleOnChange.bind(this);
+    }
+    render() {
+        return (
+            <li className="Task">
+                <div className="task-item box level">
+                    <div className="level-left">
+                        <label className="checkbox">
+                            <input type="checkbox" checked={this.state.isDone} onChange={this.handleOnChange} />
+                        </label>
+                        <span className="task-title">{this.task.title}</span>
+                    </div>
+                    <div className="level-right">
+                        <Link to={`/task/${this.task.id}/edit`}  className="icon is-small">
+                            <i className="fa fa-pencil-square-o"></i>
+                        </Link>
+                    </div>
                 </div>
-                <div className="level-right">
-                    <a href="#" className="icon is-small">
-                        <i className="fa fa-pencil-square-o"></i>
-                    </a>
-                </div>
-            </div>
-        </li>
-    );
+            </li>
+        );
+    }
+
+    handleOnChange(e) {
+        this.setState(prevState => ({ isDone: !prevState.isDone }));
+    }
 }
 
 function Tasks(props) {
@@ -26,9 +39,7 @@ function Tasks(props) {
         return null;
     }
 
-    const taskItems = props.taskList.map( (task) =>
-        <Task key={task.id} task={task} />
-    );
+    const taskItems = props.taskList.map(task => <Task key={task.id} task={task} />);
     return (
         <ul className="Tasks">{taskItems}</ul>
     );
