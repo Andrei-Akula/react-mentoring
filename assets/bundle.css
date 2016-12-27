@@ -31,6 +31,12 @@
 .todo-layout {
     margin-top: 5px;
 }
+.TaskEdit .description {
+    min-height: 160px;
+}
+.TaskEditor .TaskEditorBar {
+    margin-bottom: 10px;
+}
 body {
   margin: 0;
   padding: 0;
