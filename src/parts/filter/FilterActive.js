@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-function FilterActive() {
+function FilterActive(props) {
     return (
         <p className="control">
             <label className="checkbox">
-                <input type="checkbox" /> Show active
+                <input type="checkbox" value={props.showDone} onChange={props.onShowDoneTaskFilter} /> Show Done
             </label>
         </p>
     );

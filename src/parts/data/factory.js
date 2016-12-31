@@ -12,8 +12,7 @@ import generate from 'shortid';
 // var todoCategory = {
 //     id: 'xyz',
 //     title: 'Category 1',
-//     items: [],
-//     subCategories: []
+//     parentId: 'zaq'
 // };
 
 function makeId() {
@@ -31,14 +30,12 @@ function createItem(title, desc, done=false) {
 }
 
 
-function createCategory(title, ...subCats) {
-    var newCat = {
+function createCategory(title, parent) {
+    return {
         id: makeId(),
         title: title,
-        subCategories: subCats
+        parentId: parent ? parent.id : null
     };
-
-    return newCat;
 }
 
 

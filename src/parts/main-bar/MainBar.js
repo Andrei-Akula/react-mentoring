@@ -3,7 +3,7 @@ import FilterActive from 'src/parts/filter/FilterActive';
 import Search from 'src/parts/filter/Search';
 import './MainBar.css';
 
-function MainBar() {
+function MainBar(props) {
     return (
         <section className="MainBar">
             <nav className="level">
@@ -16,10 +16,10 @@ function MainBar() {
                 </div>
                 <div className="level-right">
                     <div className="level-item is-inline-block">
-                        <FilterActive />
+                        <FilterActive showDone={props.taskFilter.showDone} onShowDoneTaskFilter={props.onShowDoneTaskFilter} />
                     </div>
                     <div className="level-item is-inline-block">
-                        <Search />
+                        <Search search={props.taskFilter.search} onSearchTaskFilter={props.onSearchTaskFilter} />
                     </div>
                 </div>
             </nav>
