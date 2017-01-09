@@ -22,30 +22,23 @@ function TaskEditorBar({task}) {
     );
 }
 
-class TaskEditor extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render () {
-        const task = todosList.getTodoTask(this.props.params.taskId);
-        console.log('TaskEditor task', task, task.categoryId, this.props.params.taskId);
-        return (
-            <section className="TaskEditor">
-                <TaskEditorBar task={task} />
-                <div className="container is-fluid">
-                    <div className="columns task-editor-layout">
-                      <div className="column is-one-third">
-                        <Categories categoryList={todosList.getCategories()} />
-                      </div>
-                      <div className="column">
-                        <TaskEdit task={task} />
-                      </div>
-                    </div>
+function TaskEditor(props) {
+    console.log('TaskEditor task', props.taskEditing.task);
+    return (
+        <section className="TaskEditor">
+            <TaskEditorBar task={props.taskEditing.task} />
+            <div className="container is-fluid">
+                <div className="columns task-editor-layout">
+                  <div className="column is-one-third">
+                    <Categories categoryList={props.categories} />
+                  </div>
+                  <div className="column">
+                    <TaskEdit task={props.taskEditing.task} onSaveTaskChanges={props.onSaveTaskChanges} />
+                  </div>
                 </div>
-            </section>
-        );
-    }
+            </div>
+        </section>
+    );
 }
 
 export default TaskEditor;

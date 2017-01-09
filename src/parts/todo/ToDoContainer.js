@@ -32,8 +32,6 @@ function expandCategories(categories) {
 }
 
 function mapStateToProps(state, ownProps) {
-    console.log('mapStateToProps', state, ownProps);
-    //ownProps.catId
     return {
         categories: expandCategories(state.categories),
         tasks: filterTasks(filterCategoryTasks(state.tasks, ownProps.routeParams), state.taskFilter),
@@ -50,7 +48,6 @@ function mapDispatchToProps(dispatch) {
             dispatch(createAction(APPLY_TASK_FILTER, text));
         },
         onTaskDoneClick(taskId) {
-            console.log('onTaskDoneClick');
             dispatch(createAction(TOGGLE_TASK_DONE, taskId));
         }
     }

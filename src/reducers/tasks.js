@@ -13,12 +13,24 @@ function toggleDone(task, action) {
 //     return tasks.filter(task => task.categoryId === action.payload);
 // }
 
+function saveTaskChanges(tasks, action) {
+    let taskToUpdate = action.payload;
+    return tasks.map(task => {
+        if (task.id === taskToUpdate.id) {
+            return taskToUpdate;
+        } else {
+            return task;
+        }
+    });
+}
+
 function toggleTaskDone(tasks, action) {
     return tasks.map(task => toggleDone(task, action));
 }
 
 const handlerMapper = {
     // 'SHOW_CATEGORY_TASKS': showCategoryTasks,
+    'SAVE_TASK_CHANGES': saveTaskChanges,
     'TOGGLE_TASK_DONE': toggleTaskDone
 };
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import './TaskEdit.css';
 
 class TaskEdit extends React.Component {
     constructor(props) {
         super(props);
-        this.task = props.task;
+
         this.state = {
             isDone: props.task.isDone,
             title: props.task.title,
@@ -27,7 +27,8 @@ class TaskEdit extends React.Component {
         this.setState({description: e.target.value});
     }
     handleSave(e) {
-
+        this.props.onSaveTaskChanges(Object.assign({}, this.props.task, this.state));
+        browserHistory.push(`/category/${this.props.task.categoryId}`);
     }
 
 
@@ -42,7 +43,7 @@ class TaskEdit extends React.Component {
                             <button className="button is-success" onClick={this.handleSave}>Save changes</button>
                         </div>
                         <div className="level-item is-inline-block">
-                            <Link className="button is-warning" to={`/category/${this.task.categoryId}`}>Cancel</Link>
+                            <Link className="button is-warning" to={`/category/${this.props.task.categoryId}`}>Cancel</Link>
                         </div>
                     </div>
                 </div>

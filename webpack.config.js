@@ -7,7 +7,7 @@ module.exports = {
     output: {
         path: path.join(cwd, 'dist/'),
         filename: "bundle.js",
-        publicPath: "assets/"
+        publicPath: "/assets/"
     },
     module: {
         loaders: [
@@ -33,6 +33,9 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.json', '.jsx'],
         modules: [cwd, 'node_modules']
+    },
+    devServer: {
+        historyApiFallback: true
     },
     devtool: 'source-map',
     plugins: [

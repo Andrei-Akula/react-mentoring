@@ -8,7 +8,21 @@ function createItems(tasks, category, n) {
     ));
 }
 
-function getInintialState() {
+function getInitialState() {
+    var initialState = {};
+    const initialStateJSON = localStorage.getItem('initialState');
+
+    if (initialStateJSON) {
+        initialState = JSON.parse(initialStateJSON);
+    } else {
+        initialState = createInitialState();
+        localStorage.setItem('initialState', JSON.stringify(initialState));
+    }
+
+    return initialState;
+}
+
+function createInitialState() {
     const cat1 = createCategory('Category #1');
     var categories = [
         cat1,
@@ -27,6 +41,9 @@ function getInintialState() {
         taskFilter: {
             showDone: false,
             search: ''
+        },
+        taskEditing: {
+            task: null
         }
     };
 }
@@ -41,5 +58,5 @@ function assignCategoryToTasks(category, ...tasks) {
 }
 
 
-export default getInintialState;
+export default getInitialState;
 export { assignCategoryToTasks };

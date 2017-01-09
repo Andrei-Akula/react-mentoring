@@ -14,7 +14,6 @@ function cancelTaskFilter(state, action) {
 }
 
 function toggleShowDoneTaskFilter(state, action) {
-    console.log('toggleShowDoneTaskFilter', state);
     return {
         showDone: !state.showDone,
         search: state.search
