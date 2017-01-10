@@ -7,3 +7,7 @@
     margin-bottom: 10px;
     padding-left: 10px;
 }
+
+.category-item.active a {
+    color: #fff;
+}

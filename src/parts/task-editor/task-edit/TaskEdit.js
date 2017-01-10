@@ -19,16 +19,23 @@ class TaskEdit extends React.Component {
     }
     handleDone(e) {
         this.setState({isDone: !this.state.isDone});
+        updateTaskEditing();
     }
     handleTitle(e) {
         this.setState({title: e.target.value});
+        updateTaskEditing();
     }
     handleDescription(e) {
         this.setState({description: e.target.value});
+        updateTaskEditing();
     }
     handleSave(e) {
         this.props.onSaveTaskChanges(Object.assign({}, this.props.task, this.state));
         browserHistory.push(`/category/${this.props.task.categoryId}`);
+    }
+
+    updateTaskEditing() {
+        this.props.onUpdateTaskEditing(Object.assign({}, this.props.task, this.state));
     }
 
 

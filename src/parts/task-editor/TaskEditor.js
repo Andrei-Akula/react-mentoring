@@ -1,6 +1,6 @@
 import React from 'react';
 import todosList from 'src/parts/data/fetchData';
-import Categories from 'src/parts/todo/categories/Categories'
+import Categories from 'src/parts/task-editor/categories/Categories'
 import TaskEdit from 'src/parts/task-editor/task-edit/TaskEdit'
 import './TaskEditor.css';
 
@@ -22,18 +22,27 @@ function TaskEditorBar({task}) {
     );
 }
 
+
 function TaskEditor(props) {
-    console.log('TaskEditor task', props.taskEditing.task);
+    function onMoveToCategoryClick(e) {
+        e.preventDefault();
+        props.onUpdateTaskEditing(Object.assign({}, props.taskEditing.task, { categoryId: e.currentTarget.dataset.categoryId }))
+    }
+    console.log('TaskEditor', props.taskEditing.task);
     return (
         <section className="TaskEditor">
             <TaskEditorBar task={props.taskEditing.task} />
             <div className="container is-fluid">
                 <div className="columns task-editor-layout">
                   <div className="column is-one-third">
-                    <Categories categoryList={props.categories} />
+                    <Categories categoryList={props.categories}
+                        task={props.taskEditing.task}
+                        onMoveToCategoryClick={onMoveToCategoryClick} />
                   </div>
                   <div className="column">
-                    <TaskEdit task={props.taskEditing.task} onSaveTaskChanges={props.onSaveTaskChanges} />
+                    <TaskEdit task={props.taskEditing.task}
+                        onSaveTaskChanges={props.onSaveTaskChanges}
+                        onUpdateTaskEditing={props.onUpdateTaskEditing}  />
                   </div>
                 </div>
             </div>

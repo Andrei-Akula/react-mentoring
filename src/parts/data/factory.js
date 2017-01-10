@@ -19,13 +19,14 @@ function makeId() {
     return generate();
 }
 
-function createItem(title, desc, done=false) {
+function createItem(title, desc, done=false, catId='') {
     return {
         id: makeId(),
         date: Date.now(),
         isDone: done,
         title: title,
-        description: desc
+        description: desc,
+        categoryId: catId
     };
 }
 

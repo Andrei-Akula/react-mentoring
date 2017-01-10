@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Todo from 'src/parts/todo/Todo';
-import createAction, { SHOW_DONE_TASK_FILTER, APPLY_TASK_FILTER, TOGGLE_TASK_DONE } from 'src/actions/index';
+import createAction, { SHOW_DONE_TASK_FILTER, APPLY_TASK_FILTER, TOGGLE_TASK_DONE, ADD_NEW_TASK } from 'src/actions/index';
 
 function filterCategoryTasks(tasks, params) {
     return tasks.filter(task => task.categoryId === params.catId);
@@ -35,7 +35,8 @@ function mapStateToProps(state, ownProps) {
     return {
         categories: expandCategories(state.categories),
         tasks: filterTasks(filterCategoryTasks(state.tasks, ownProps.routeParams), state.taskFilter),
-        taskFilter: state.taskFilter
+        taskFilter: state.taskFilter,
+        categoryId: ownProps.routeParams.catId
     }
 };
 
@@ -49,6 +50,9 @@ function mapDispatchToProps(dispatch) {
         },
         onTaskDoneClick(taskId) {
             dispatch(createAction(TOGGLE_TASK_DONE, taskId));
+        },
+        onAddNewTaskClick(taskTitle) {
+            dispatch(createAction(ADD_NEW_TASK, taskTitle));
         }
     }
 }
