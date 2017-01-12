@@ -1,1 +1,4 @@
-
+.category-item.active {
+    background-color: #3273dc;
+    color: #fff;
+}

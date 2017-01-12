@@ -6,7 +6,6 @@ class Task extends React.Component {
     constructor(props){
         super(props);
         this.state = { isDone: props.task.isDone };
-        this.task = props.task;
         this.handleOnChange = this.handleOnChange.bind(this);
     }
     render() {
@@ -17,10 +16,11 @@ class Task extends React.Component {
                         <label className="checkbox">
                             <input type="checkbox" checked={this.state.isDone} onChange={this.handleOnChange} />
                         </label>
-                        <span className="task-title">{this.task.title}</span>
+                        <span className="task-title">{this.props.task.title}</span>
                     </div>
                     <div className="level-right">
-                        <Link to={`/task/${this.task.id}/edit`}  className="icon is-small">
+                        <Link to={`/task/${this.props.task.id}/edit`}
+                            className="icon is-small" title="Edit task">
                             <i className="fa fa-pencil-square-o"></i>
                         </Link>
                     </div>
@@ -30,7 +30,8 @@ class Task extends React.Component {
     }
 
     handleOnChange(e) {
-        this.setState(prevState => ({ isDone: !prevState.isDone }));
+        this.setState({ isDone: !this.state.isDone });
+        this.props.onTaskDoneClick(this.props.task.id);
     }
 }
 
@@ -39,7 +40,7 @@ function Tasks(props) {
         return null;
     }
 
-    const taskItems = props.taskList.map(task => <Task key={task.id} task={task} />);
+    const taskItems = props.taskList.map(task => <Task key={task.id} task={task} onTaskDoneClick={props.onTaskDoneClick} />);
     return (
         <ul className="Tasks">{taskItems}</ul>
     );

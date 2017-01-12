@@ -1,6 +1,6 @@
 import React from 'react';
 import todosList from 'src/parts/data/fetchData';
-import Categories from 'src/parts/todo/categories/Categories'
+import Categories from 'src/parts/task-editor/categories/Categories'
 import TaskEdit from 'src/parts/task-editor/task-edit/TaskEdit'
 import './TaskEditor.css';
 
@@ -22,30 +22,32 @@ function TaskEditorBar({task}) {
     );
 }
 
-class TaskEditor extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
-    render () {
-        const task = todosList.getTodoTask(this.props.params.taskId);
-        console.log('TaskEditor task', task, task.categoryId, this.props.params.taskId);
-        return (
-            <section className="TaskEditor">
-                <TaskEditorBar task={task} />
-                <div className="container is-fluid">
-                    <div className="columns task-editor-layout">
-                      <div className="column is-one-third">
-                        <Categories categoryList={todosList.getCategories()} />
-                      </div>
-                      <div className="column">
-                        <TaskEdit task={task} />
-                      </div>
-                    </div>
-                </div>
-            </section>
-        );
+function TaskEditor(props) {
+    function onMoveToCategoryClick(e) {
+        e.preventDefault();
+        props.onUpdateTaskEditing(Object.assign({}, props.taskEditing.task, { categoryId: e.currentTarget.dataset.categoryId }))
     }
+    console.log('TaskEditor', props.taskEditing.task);
+    return (
+        <section className="TaskEditor">
+            <TaskEditorBar task={props.taskEditing.task} />
+            <div className="container is-fluid">
+                <div className="columns task-editor-layout">
+                  <div className="column is-one-third">
+                    <Categories categoryList={props.categories}
+                        task={props.taskEditing.task}
+                        onMoveToCategoryClick={onMoveToCategoryClick} />
+                  </div>
+                  <div className="column">
+                    <TaskEdit task={props.taskEditing.task}
+                        onSaveTaskChanges={props.onSaveTaskChanges}
+                        onUpdateTaskEditing={props.onUpdateTaskEditing}  />
+                  </div>
+                </div>
+            </div>
+        </section>
+    );
 }
 
 export default TaskEditor;

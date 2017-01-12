@@ -12,33 +12,31 @@ import generate from 'shortid';
 // var todoCategory = {
 //     id: 'xyz',
 //     title: 'Category 1',
-//     items: [],
-//     subCategories: []
+//     parentId: 'zaq'
 // };
 
 function makeId() {
     return generate();
 }
 
-function createItem(title, desc, done=false) {
+function createItem(title, desc, done=false, catId='') {
     return {
         id: makeId(),
         date: Date.now(),
         isDone: done,
         title: title,
-        description: desc
+        description: desc,
+        categoryId: catId
     };
 }
 
 
-function createCategory(title, ...subCats) {
-    var newCat = {
+function createCategory(title, parent) {
+    return {
         id: makeId(),
         title: title,
-        subCategories: subCats
+        parentId: parent ? parent.id : null
     };
-
-    return newCat;
 }
 
 
