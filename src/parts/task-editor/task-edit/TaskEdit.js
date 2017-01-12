@@ -31,7 +31,7 @@ class TaskEdit extends React.Component {
     }
     handleSave(e) {
         this.props.onSaveTaskChanges(Object.assign({}, this.props.task, this.state));
-        browserHistory.push(`/category/${this.props.task.categoryId}`);
+        browserHistory.push(`/react-mentoring/category/${this.props.task.categoryId}`);
     }
 
     updateTaskEditing() {
@@ -50,7 +50,7 @@ class TaskEdit extends React.Component {
                             <button className="button is-success" onClick={this.handleSave}>Save changes</button>
                         </div>
                         <div className="level-item is-inline-block">
-                            <Link className="button is-warning" to={`/category/${this.props.task.categoryId}`}>Cancel</Link>
+                            <Link className="button is-warning" to={`/react-mentoring/category/${this.props.task.categoryId}`}>Cancel</Link>
                         </div>
                     </div>
                 </div>

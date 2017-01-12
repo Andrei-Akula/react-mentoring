@@ -8,6 +8,10 @@
   to { transform: rotate(360deg); }
 }
 
+.category-item.box,
+.task-item.box {
+    padding: 10px;
+}
 .MainBar {
     background-color: #fff;
     padding: 20px;
@@ -21,6 +25,10 @@
     margin-bottom: 10px;
     padding-left: 10px;
 }
+
+.category-item.active a {
+    color: #fff;
+}
 .task-item .task-title {
     margin-left: 10px;
 }
@@ -30,6 +38,10 @@
 
 .todo-layout {
     margin-top: 5px;
+}
+.category-item.active {
+    background-color: #3273dc;
+    color: #fff;
 }
 .TaskEdit .description {
     min-height: 160px;

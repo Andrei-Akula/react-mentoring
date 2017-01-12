@@ -20,8 +20,8 @@ ReactDOM.render((
         <Router history={browserHistory}>
             <Route path={rootPath} component={App} >
                 <IndexRoute component={ToDoContainer}/>
-                <Route path="/category/:catId" component={ToDoContainer} />
-                <Route path="/task/:taskId/edit" component={TaskEditorContainer} />
+                <Route path="/react-mentoring/category/:catId" component={ToDoContainer} />
+                <Route path="/react-mentoring/task/:taskId/edit" component={TaskEditorContainer} />
             </Route>
         </Router>
     </Provider>

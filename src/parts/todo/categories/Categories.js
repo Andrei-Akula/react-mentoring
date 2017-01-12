@@ -50,9 +50,9 @@ class Category extends React.Component {
             categoryIdList: categoriesToDelete,
             categoryId: this.props.category.id
         });
-        
+
         if (this.props.selectedId === this.props.category.id) {
-            browserHistory.replace('/category/default');
+            browserHistory.replace('/react-mentoring/category/default');
         }
     }
 
@@ -93,7 +93,7 @@ class Category extends React.Component {
                             </a>
                         </div>
                         <div className="level-item is-inline-block">
-                            <Link to={`/category/${this.props.category.id}`}>{this.props.category.title}</Link>
+                            <Link to={`/react-mentoring/category/${this.props.category.id}`}>{this.props.category.title}</Link>
                         </div>
                     </div>
                     {

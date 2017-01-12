@@ -19,7 +19,7 @@ class Task extends React.Component {
                         <span className="task-title">{this.props.task.title}</span>
                     </div>
                     <div className="level-right">
-                        <Link to={`/task/${this.props.task.id}/edit`}
+                        <Link to={`/react-mentoring/task/${this.props.task.id}/edit`}
                             className="icon is-small" title="Edit task">
                             <i className="fa fa-pencil-square-o"></i>
                         </Link>
