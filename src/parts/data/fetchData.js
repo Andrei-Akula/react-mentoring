@@ -23,11 +23,14 @@ function getInitialState() {
 }
 
 function createInitialState() {
+    const catDefault = createCategory('Default');
+    catDefault.id = 'default';
     const cat1 = createCategory('Category #1');
     var categories = [
         cat1,
         createCategory('Category #1.2', cat1),
-        createCategory('Category #1.3', cat1)
+        createCategory('Category #1.3', cat1),
+        catDefault
     ];
 
     var tasks = [];

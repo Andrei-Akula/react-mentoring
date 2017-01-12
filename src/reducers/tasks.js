@@ -1,5 +1,6 @@
-import { SAVE_TASK_CHANGES, TOGGLE_TASK_DONE, ADD_NEW_TASK } from 'src/actions/index';
+import { SAVE_TASK_CHANGES, TOGGLE_TASK_DONE, ADD_NEW_TASK, DELETE_CATEGORY } from 'src/actions/index';
 import { createItem  } from 'src/parts/data/factory';
+import { getDeepSubCategories } from './categories';
 
 // task
 //
@@ -35,11 +36,24 @@ function addNewTask(tasks, action) {
     return [].concat(createItem(action.payload.text, '', false, action.payload.categoryId), tasks);
 }
 
+function deleteCategory(tasks, action) {
+    const categoriesToDelete = action.payload.categoryIdList;
+
+    return tasks.map(task => {
+        if (categoriesToDelete.indexOf(task.categoryId) !== -1) {
+            return Object.assign({}, task, { categoryId: 'default' });
+        } else {
+            return task;
+        }
+    });
+}
+
 const handlerMapper = {
     // SHOW_CATEGORY_TASKS: showCategoryTasks,
     SAVE_TASK_CHANGES: saveTaskChanges,
     TOGGLE_TASK_DONE: toggleTaskDone,
-    ADD_NEW_TASK: addNewTask
+    ADD_NEW_TASK: addNewTask,
+    DELETE_CATEGORY: deleteCategory
 };
 
 function tasks(state = [], action) {

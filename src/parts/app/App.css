@@ -1,1 +1,5 @@
 
+.category-item.box,
+.task-item.box {
+    padding: 10px;
+}

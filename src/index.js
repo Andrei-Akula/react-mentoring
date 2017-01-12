@@ -13,7 +13,7 @@ import './index.css';
 
 const rootPath = '/';
 
-const store = createStore(todoAppReducer, getInitialState())
+const store = createStore(todoAppReducer, getInitialState());
 
 ReactDOM.render((
     <Provider store={store}>
