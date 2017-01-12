@@ -13,7 +13,7 @@ function Todo(props) {
         props.onAddNewTaskClick({
             'text': text,
             'categoryId': props.categoryId
-        })
+        });
     }
 
     return (
@@ -21,13 +21,15 @@ function Todo(props) {
         <MainBar taskFilter={props.taskFilter}
             onShowDoneTaskFilter={props.onShowDoneTaskFilter}
             onSearchTaskFilter={props.onSearchTaskFilter} />
-        <ProgressBar value="10" max="50" />
+        <ProgressBar value={props.progressData.doneCount} max={props.progressData.total} />
         <div className="container is-fluid">
             <div className="columns todo-layout">
               <div className="column is-one-third">
                 <AddNew placeholder="Enter new category" onAddClick={props.onAddCategoryClick} />
                 <Categories categoryList={props.categories} categoryLevel={null} selectedId={props.categoryId}
-                    onDeleteCategoryClick={props.onDeleteCategoryClick} />
+                    onDeleteCategoryClick={props.onDeleteCategoryClick}
+                    onEditCategoryTitleClick={props.onEditCategoryTitleClick}
+                    onAddSubCategoryByTitleClick={props.onAddSubCategoryByTitleClick} />
               </div>
               <div className="column">
                 {

@@ -33,7 +33,11 @@ function toggleTaskDone(tasks, action) {
 }
 
 function addNewTask(tasks, action) {
-    return [].concat(createItem(action.payload.text, '', false, action.payload.categoryId), tasks);
+    if (action.payload.text) {
+        return [].concat(createItem(action.payload.text, '', false, action.payload.categoryId), tasks);
+    } else {
+        return tasks;
+    }
 }
 
 function deleteCategory(tasks, action) {

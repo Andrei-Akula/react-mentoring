@@ -24,6 +24,7 @@ class AddNew extends React.Component {
     onAdd(e) {
         if (this.props.onAddClick) {
             this.props.onAddClick(this.state.text);
+            this.setState({text: ''});
         }
     }
     onTextChange(e) {

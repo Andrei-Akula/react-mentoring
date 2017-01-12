@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
+import ModalTextBox from 'src/parts/modal/text-box/ModalTextBox';
 import './Categories.css';
 
 function doNothing(e) {
@@ -15,11 +16,18 @@ function getDeepSubCategoryIds(categories, categoryId) {
 class Category extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { isExpanded: false };
+        this.state = {
+            isExpanded: false,
+            isCategoryTitleEditing: false,
+            isAddingSubCategoryEditing: false
+        };
         this.onExpandClick = this.onExpandClick.bind(this);
         this.onAddSubcategory = this.onAddSubcategory.bind(this);
         this.onEditTitleClick = this.onEditTitleClick.bind(this);
         this.onDeleteClick = this.onDeleteClick.bind(this);
+        this.CloseModalTextBox = this.CloseModalTextBox.bind(this);
+        this.ChangeCategoryTitle = this.ChangeCategoryTitle.bind(this);
+        this.AddSubCategoryByTitle = this.AddSubCategoryByTitle.bind(this);
     }
 
     onExpandClick(e) {
@@ -28,9 +36,11 @@ class Category extends React.Component {
     }
     onAddSubcategory(e) {
         e.preventDefault();
+        this.setState({ isAddingSubCategoryEditing: true });
     }
     onEditTitleClick(e) {
         e.preventDefault();
+        this.setState({ isCategoryTitleEditing: true });
     }
     onDeleteClick(e) {
         e.preventDefault();
@@ -39,8 +49,31 @@ class Category extends React.Component {
         this.props.onDeleteCategoryClick({
             categoryIdList: categoriesToDelete,
             categoryId: this.props.category.id
-         });
-        browserHistory.replace('/category/default');
+        });
+        
+        if (this.props.selectedId === this.props.category.id) {
+            browserHistory.replace('/category/default');
+        }
+    }
+
+    CloseModalTextBox() {
+        this.setState({ isCategoryTitleEditing: false, isAddingSubCategoryEditing: false });
+    }
+
+    ChangeCategoryTitle(text) {
+        this.props.onEditCategoryTitleClick({
+            categoryId: this.props.category.id,
+            title: text
+        })
+        this.CloseModalTextBox();
+    }
+
+    AddSubCategoryByTitle(text) {
+        this.props.onAddSubCategoryByTitleClick({
+            categoryId: this.props.category.id,
+            subCategoryTitle: text
+        })
+        this.CloseModalTextBox();
     }
 
     render() {
@@ -68,7 +101,7 @@ class Category extends React.Component {
                         <div className="level-right">
                             <div className="level-item is-inline-block">
                                 <a href="#" className="icon is-small"
-                                    title="Add sub category"
+                                    title="Add subcategory"
                                     onClick={this.onAddSubcategory}>
                                     <i className="fa fa-plus"></i>
                                 </a>
@@ -93,7 +126,22 @@ class Category extends React.Component {
                 {
                     this.state.isExpanded &&
                     <Categories selectedId={this.props.selectedId} categoryList={this.props.categoryList}
-                        categoryLevel={this.props.category.id} onDeleteCategoryClick={this.props.onDeleteCategoryClick} />
+                        categoryLevel={this.props.category.id}
+                        onDeleteCategoryClick={this.props.onDeleteCategoryClick}
+                        onEditCategoryTitleClick={this.props.onEditCategoryTitleClick}
+                        onAddSubCategoryByTitleClick={this.props.onAddSubCategoryByTitleClick} />
+                }
+                {
+                    this.state.isCategoryTitleEditing &&
+                    <ModalTextBox text={this.props.category.title}
+                        label={`New Title for "${this.props.category.title}"`}
+                        onSubmitClick={this.ChangeCategoryTitle} onCloseClick={this.CloseModalTextBox} />
+                }
+                {
+                    this.state.isAddingSubCategoryEditing &&
+                    <ModalTextBox text="" placeholder="Enter Category Title"
+                        label={`Subcategory for "${this.props.category.title}"`}
+                        onSubmitClick={this.AddSubCategoryByTitle} onCloseClick={this.CloseModalTextBox} />
                 }
             </li>
         );
@@ -110,7 +158,9 @@ function Categories(props) {
     const categoryItems = levelCategoryList.map( (cat) =>
         <Category key={cat.id} category={cat} selectedId={props.selectedId}
             categoryList={props.categoryList} categoryLevel={cat.id}
-            onDeleteCategoryClick={props.onDeleteCategoryClick} />
+            onDeleteCategoryClick={props.onDeleteCategoryClick}
+            onEditCategoryTitleClick={props.onEditCategoryTitleClick}
+            onAddSubCategoryByTitleClick={props.onAddSubCategoryByTitleClick} />
     );
     return (
         <ul className="Categories">{categoryItems}</ul>
