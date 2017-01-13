@@ -49,6 +49,10 @@
 .TaskEditor .TaskEditorBar {
     margin-bottom: 10px;
 }
+
+.TaskEditor {
+    min-height: 500px;
+}
 body {
   margin: 0;
   padding: 0;
