@@ -79,8 +79,7 @@ class Category extends React.Component {
     render() {
         const activeClsName = this.props.category.id === this.props.selectedId ? 'active' : '';
         const hasSubcategories = this.props.categoryList.filter(c => c.parentId === this.props.category.id).length > 0;
-        const expandIcon = this.state.isExpanded ? 'fa-minus-square-o' :
-            (hasSubcategories ? 'fa-plus-square-o' : '');
+        const expandIcon = hasSubcategories ? (this.state.isExpanded ? 'fa-minus-square-o' : 'fa-plus-square-o') : '';
 
         return (
             <li className="Category">

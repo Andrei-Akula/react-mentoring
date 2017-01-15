@@ -17,13 +17,21 @@ function changeCategoryTitle(categories, action) {
 function addNestedCategory(categories, action) {
     const { categoryId, subCategoryTitle } = action.payload;
     if (subCategoryTitle && subCategoryTitle !== 'default') {
-        return categories.map(c => {
-            if (c.title === subCategoryTitle) {
-                return Object.assign({}, c, { parentId: categoryId });
-            } else {
-                return c;
-            }
-        });
+        // if existing cantegoty then change parentId
+        if (categories.some(c => c.title === subCategoryTitle)) {
+            return categories.map(c => {
+                if (c.title === subCategoryTitle) {
+                    return Object.assign({}, c, { parentId: categoryId });
+                } else {
+                    return c;
+                }
+            });
+        } else {
+            // if new categoty then create
+            let newCategory = createCategory(subCategoryTitle);
+            newCategory.parentId = categoryId;
+            return categories.concat(newCategory);
+        }
     } else {
         return categories;
     }
